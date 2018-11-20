@@ -1,61 +1,78 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta charset="utf-8">
-	
+
     <title>ICT2201-M4</title>
     <meta name="description" content="ICT2201-M4 A-Frame">
     <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
-	<script src="https://rawgit.com/feiss/aframe-environment-component/master/dist/aframe-environment-component.min.js"></script>
-	<script src="//cdn.rawgit.com/donmccurdy/aframe-physics-system/v3.2.0/dist/aframe-physics-system.min.js"></script>
-	<script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v4.2.0/dist/aframe-extras.min.js"></script>
-  </head>
+    <script src="https://unpkg.com/aframe-animation-component@^5.1.2/dist/aframe-animation-component.min.js"></script>
+    <script src="https://rawgit.com/feiss/aframe-environment-component/master/dist/aframe-environment-component.min.js"></script>
+    <script src="//cdn.rawgit.com/donmccurdy/aframe-physics-system/v3.2.0/dist/aframe-physics-system.min.js"></script>
+    <script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v4.2.0/dist/aframe-extras.min.js"></script>
+</head>
   
   <body>
- <a-scene>
- 
-  <a-assets>
-    <a-asset-item id="scene" src="scene.gltf"> </a-asset-item>
-	<a-asset-item id= "car" src="/ICT2201_M4_aframe/car/car.gltf"> </a-asset-item>
-	<a-asset-item id= "bicycle" src="/ICT2201_M4_aframe/dirt_bicycle_3d_model/bicycle.gltf"> </a-asset-item>
-	<a-asset-item id= "city" src="/ICT2201_M4_aframe/tiny_city/tiny.gltf"> </a-asset-item>
-	<a-asset-item id= "pedesterian" src="/ICT2201_M4_aframe/running/run.gltf"></a-asset-item>
-	<a-asset-item id="scooter" src="/ICT2201_M4_aframe/razor_scooter/scooter.gltf"> </a-asset-item>
-  </a-assets>
-<a-entity environment skyColor="blue"></a-entity>
-  <!-- Using the asset management system. -->
+     
+      <!-- Scene -->
+      <a-scene>
 
-  <!-- Defining the URL inline. Not recommended but more comfortable for web developers. -->
+          <a-assets>
+              <a-asset-item id="scene" src="scene.gltf"> </a-asset-item>
+              <a-asset-item id="car" src="/ICT2201_M4_aframe/car/car.gltf"> </a-asset-item>
+              <a-asset-item id="bicycle" src="/ICT2201_M4_aframe/dirt_bicycle_3d_model/bicycle.gltf"> </a-asset-item>
+              <a-asset-item id="city" src="/ICT2201_M4_aframe/tiny_city/tiny.gltf"> </a-asset-item>
+              <a-asset-item id="pedesterian" src="/ICT2201_M4_aframe/running/run.gltf"></a-asset-item>
+              <a-asset-item id="scooter" src="/ICT2201_M4_aframe/razor_scooter/scooter.gltf"> </a-asset-item>
+          </a-assets>
 
-   <a-gltf-model src="#car" position="0 2 4"  scale="0.01 0.01 0.01"  >
 
-   </a-gltf-model>
-   
-</a-entity>
-  <a-gltf-model src="#bicycle" position="6.962 3 -0.886" scale="1 1 1"  ></a-gltf-model>
+          <a-gltf-model src="#city" position="0 13 0" scale="30 30 30 "></a-gltf-model>
 
-  <a-gltf-model src="#city" position="6.962 15 10" scale="30 30 30 "  ></a-gltf-model>
+          <a-entity environment skyColor="blue"></a-entity>
+          <!-- Using the asset management system. -->
+          <a-grid static-body></a-grid>
+          <!-- Defining the URL inline. Not recommended but more comfortable for web developers. -->
 
-	  <a-entity id="rig"
-          movement-controls
-          position="-3 2 4">
-  <a-entity camera 
-            position="0 -2 -2"
-            look-controls="pointerLockEnabled: true">
-			<a-gltf-model="#bicycle">
-			
-			</a-gltf-model>
-			</a-entity>
 
-</a-entity>
+          <a-gltf-model src="#car" static-body="sphereRadius:NaN" position="-19.432100807788746 -0.1032842164301151 14.869613592836474" scale="0.01 0.01 0.01" rotation="-0.7078002336448206 0 0" gltf-model="/ICT2201_M4_aframe/car/car.gltf" velocity="5 0 0">
 
-</a-entity>
 
-	 
-	 
+              <a-animation mixer="" attribute="rotation" dur="10000" velocity="0 0 0 " fill="forwards" from="-1 0 0" to="0.3 0 0" repeat="indefinite" direction="normal">
+              </a-animation>
+          </a-gltf-model>
 
-</a-scene> 
+          <a-gltf-model src="#car" static-body="sphereRadius:NaN" position="-1.102 -0.003 14.127" scale="0.01 0.01 0.01" rotation="-0.7078002336448206 90.010 0" gltf-model="/ICT2201_M4_aframe/car/car.gltf" velocity="5 0 0">
 
+              <a-animation mixer="" attribute="rotation" dur="10000" velocity="0 0 0 " fill="forwards" from="-1 0 0" to="0.3 0 0" repeat="indefinite" direction="normal">
+              </a-animation>
+
+
+          </a-gltf-model>
+
+          <a-gltf-model src="#car" static-body="sphereRadius:NaN" position="-16.787 -0.103 5.220" scale="0.01 0.01 0.01" rotation="-0.7078002336448206 0 0" gltf-model="/ICT2201_M4_aframe/car/car.gltf" velocity="5 0 0">
+
+              <a-animation mixer="" attribute="rotation" dur="10000" velocity="0 0 0 " fill="forwards" from="-1 0 0" to="0.3 0 0" repeat="indefinite" direction="normal">
+              </a-animation>
+
+
+          </a-gltf-model>
+
+          <a-gltf-model src="#bicycle" static-body position="6.962 2 -0.886" scale="1 1 1">
+
+          </a-gltf-model>
+          <a-entity id="rig" movement-controls kinematic-body>
+              <a-entity camera universal-controls gltf-model src="#bicycle"
+                        position="0 1.6 0"
+                        look-controls="pointerLockEnabled: true"></a-entity>
+          </a-entity>
+
+      </a-scene>
+      var npcEl = document.querySelector('#npc');
+      npcEl.setAttribute('nav-agent', {
+      active: true,
+      destination: e.detail.intersection.point
+      });
 
   </body>
 </html>
