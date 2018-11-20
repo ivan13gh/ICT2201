@@ -17,7 +17,7 @@ TO DO LIST FOR VEHICLE COLLISION:
 Look for solutions to check if the  user is hit by the car and if the user is hit, stop the game and display a game over 
 Look for solutions to re spawn the car once it is done moving.
 
-TO DO LIST FOR PEDESTRIAN
+TO DO LIST FOR PEDESTRIAN: 
 Look for pedestrian gltf
 
 
