@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+
+    <title>ICT2201-M4</title>
+    <meta name="description" content="ICT2201-M4 A-Frame">
+    <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-animation-component@^5.1.2/dist/aframe-animation-component.min.js"></script>
+    <script src="https://rawgit.com/feiss/aframe-environment-component/master/dist/aframe-environment-component.min.js"></script>
+    <script src="//cdn.rawgit.com/donmccurdy/aframe-physics-system/v3.2.0/dist/aframe-physics-system.min.js"></script>
+    <script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v4.2.0/dist/aframe-extras.min.js"></script>
+    <script src="https://recast-api.donmccurdy.com/aframe-inspector-plugin-recast.js"></script>
+    <script src="https://rawgit.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
+</head>
+  
+  <body>
+     
+      <!-- Scene -->
+      <a-scene inspector-plugin-recast>
+
+          <a-assets>
+              <a-asset-item id="scene" src="scene.gltf"> </a-asset-item>
+              <a-asset-item id="car" src="/ICT2201_M4_aframe/car/car.gltf"> </a-asset-item>
+              <a-asset-item id="bicycle" src="/ICT2201_M4_aframe/dirt_bicycle_3d_model/bicycle.gltf"> </a-asset-item>
+              <a-asset-item id="city" src="/ICT2201_M4_aframe/tiny_city/tiny.gltf"> </a-asset-item>
+              <a-asset-item id="pedesterian" src="/ICT2201_M4_aframe/running/scene.gltf"></a-asset-item>
+              <a-asset-item id="scooter" src="/ICT2201_M4_aframe/razor_scooter/scooter.gltf"> </a-asset-item>
+
+          </a-assets>
+
+          <a-light type="directional"
+                   color="#FFF"
+                   intensity="0.5"
+                   position="-1 1 2">
+          </a-light>
+          <a-light type="ambient"
+                   color="#FFF">
+          </a-light>
+          <a-gltf-model src="#city" position="0 23 0" scale="60 60 60 "></a-gltf-model>
+
+          <a-entity environment skyColor="blue" position="0 -3.714 0"></a-entity>
+          <!-- Using the asset management system. -->
+          <a-grid static-body position="0 -2.408 0" scale="100 100 100"></a-grid>
+          <!-- Defining the URL inline. Not recommended but more comfortable for web developers. -->
+
+
+          <a-gltf-model src="#car" static-body="sphereRadius:NaN" position="-37.542 -2.129 -12.732" scale="0.01 0.01 0.01" rotation="-0.7078002336448206 0 0">
+              <a-animation attribute="position" dur="10000" from="-37.542 -2.129 -12.732" to="37.542 -2.129 -12.732" repeat="indefinite" direction="normal">
+              </a-animation>
+
+
+          </a-gltf-model>
+
+          <a-gltf-model src="#car" static-body="sphereRadius:NaN" position="-1.102 -0.003 14.127" scale="0.01 0.01 0.01" rotation="-0.7078002336448206 90.010 0">
+
+              <a-animation attribute="position" dur="10000" from="-1.102 -2.315 14.127" to="-1.102 -2.315 -30.127" repeat="indefinite" direction="normal">
+              </a-animation>
+
+
+          </a-gltf-model>
+
+          <a-gltf-model src="#car" static-body="sphereRadius:NaN" position="7.902 -2.315 -46.395" scale="0.01 0.01 0.01" rotation="-0.708 -90.000 0">
+
+              <a-animation attribute="position" dur="10000" from=" 7.902 -2.315 -46.395" to="7.902 -2.315 46.395" repeat="indefinite" direction="normal">
+              </a-animation>
+
+
+
+
+          </a-gltf-model>
+          <a-gltf-model src="#pedesterian" static body position="-5.066 -2 -4.234 " scale="0.010 0.010 0.010" animation-mixer>
+          </a-gltf-model>
+          <a-gltf-model src="#car" static-body="sphereRadius:NaN" position="-55.189 -2.315 11.153" scale="0.01 0.01 0.01" rotation="-0.708 0 0">
+
+              <a-animation attribute="position" dur="10000" from=" -55.189 -2.315 11.153" to="55.189 -2.315 11.153" repeat="indefinite" direction="normal">
+              </a-animation>
+
+
+
+
+          </a-gltf-model>
+          <a-entity id="rig" movement-controls kinematic-body>
+              <a-entity camera universal-controls
+                        position="0 3 0"
+                        look-controls="pointerLockEnabled: true"></a-entity>
+          </a-entity>
+
+      </a-scene>
+      var npcEl = document.querySelector('#npc');
+      npcEl.setAttribute('nav-agent', {
+      active: true,
+      destination: e.detail.intersection.point
+      });
+
+  </body>
+</html>
