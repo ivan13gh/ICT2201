@@ -1,91 +1,32 @@
-# A-Frame Boilerplate
+Introduction
 
-Boilerplate for creating WebVR scenes with [A-Frame](https://aframe.io).
+This README file provides an overview of our team’s project prototype on the virtual reality game that
+aims to educate users on safe cycling and safe usage of PMDs in Singapore. Our product which
+is known as Aegis will give the user a simulated virtual environment that resembles the roads
+and terrains in Singapore. The purpose of this prototype will be to educate the user by making them aware of the different road hazards in various scenarios and the proper actions they must take to prevent accidents. 
+Through a designer interface, SCTF is able to change specific game settings to re-enact different scenarios that a user might face on the roads.
 
-Alternatively, check out the [A-Frame Starter on
-glitch.com](https://glitch.com/~aframe) for a more interactive way on getting
-started.
+How To Run?
 
-## Getting Started
+-In order to run the prototype, the user can run the application through the github IO link shown below:
 
-There are two easy options for obtaining this A-Frame scene. It's then up to you to make it your own!
-
-### <sup>Option 1:</sup> Download the ZIP kit 📦
-
-[<img src="http://i.imgur.com/UVPZoM0.png" width="200">](https://github.com/aframevr/aframe-boilerplate/archive/master.zip)
-
-After you have __[downloaded and extracted this `.zip` file](https://github.com/aframevr/aframe-boilerplate/archive/master.zip)__ containing the contents of this repo, open the resulting directory, and you'll be have your scene ready in these few steps:
-
-    npm install && npm start
-    open http://localhost:3000/
-
-<hr>
-
-### <small><sup>Option 2:</sup> Fork this Git repo 🍴🐙
-
-Alternatively, you can __[fork this repo](https://github.com/aframevr/aframe-boilerplate/fork)__ to get started, if you'd like to maintain a Git workflow.
-
-After you have __[forked this repo](https://github.com/aframevr/aframe-boilerplate/fork)__, clone a copy of your fork locally and you'll be have your scene ready in these few steps:
-
-    git clone https://github.com/aframevr/aframe-boilerplate.git
-    cd aframe-boilerplate && rm -rf .git && npm install && npm start
-    open http://localhost:3000/
-
-> :iphone: **Mobile pro tip:** Upon starting the development server, the URL will be logged to the console. Load that URL from a browser on your mobile device. (If your mobile phone and computer are not on the same LAN, consider using [ngrok](https://ngrok.com/) for local development and testing. [Browsersync](https://www.browsersync.io/) is also worth a gander.)
-
-<hr>
-
-### <small><sup>Option 3:</sup> Fork this CodePen example 🍴💾✒️
-
-Or, you can simply __[fork this CodePen example](http://codepen.io/team/mozvr/pen/BjygdO?editors=100)__ to dive right in. Enjoy!
+	link:https://ivan13gh.github.io/ICT2X01/
 
 
-## Publishing your scene
+Alternatively, the user can download the file from Github and run locally by placing the file in the htdocs folder of their web server.
 
-If you don't already know, GitHub offers free and awesome publishing of static sites through __[GitHub Pages](https://pages.github.com/)__.
+-To run locally, the user will be required to install the following software:
+	XAMPP version 7.2.12 / PHP 7.2.12. 
+	- URL to download and install xampp: https://www.apachefriends.org/download.html 
+	AFrame
+	- Installation guide to install aframe and node.js:https://aframe.io/docs/0.8.0/introduction/installation.html 
 
-To publish your scene to your personal GitHub Pages:
-
-    npm run deploy
-
-And, it'll now be live at __http://`your_username`.github.io/__ :)
-
-<hr>
-
-To know which GitHub repo to deploy to, the `deploy` script first looks at the optional [`repository` key](https://docs.npmjs.com/files/package.json#repository) in the [`package.json` file](package.json) (see [npm docs](https://docs.npmjs.com/files/package.json#repository) for sample usage). If the `repository` key is missing, the script falls back to using the local git repo's remote origin URL (you can run the local command `git remote -v` to see all your remotes; also, you may refer to the [GitHub docs](https://help.github.com/articles/about-remote-repositories/) for more information).
-
-<hr>
-
-## Still need Help?
-
-### Installation
-
-First make sure you have Node installed.
-
-On Mac OS X, it's recommended to use [Homebrew](http://brew.sh/) to install Node + [npm](https://www.npmjs.com):
-
-    brew install node
-
-To install the Node dependencies:
-
-    npm install
+-After installing node.js, user can run locally by placing the file in the htdocs folder of their web server.
+	- For Windows path:
+		C:\xampp\htdocs
+	- For Linux:
+		/etc/lampp/htdocs
 
 
-### Local Development
-
-To serve the site from a simple Node development server:
-
-    npm start
-
-Then launch the site from your favourite browser:
-
-[__http://localhost:3000/__](http://localhost:3000/)
-
-If you wish to serve the site from a different port:
-
-    PORT=8000 npm start
-
-
-## License
-
-This program is free software and is distributed under an [MIT License](LICENSE).
+Below will be a demonstration of the prototype:
+Youtube link: https://youtu.be/scMyGUrbdOE
