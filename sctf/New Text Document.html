@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html><head><title>Form template with CSS grid auto placement</title>
+  <link href="https://fonts.googleapis.com/css?family=Unkempt" rel="stylesheet">
+  <!-- <script src="jquery-3.3.1.min.js"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  
+
+  <script src="FileSaver.js"></script>
+  <style>
+  .myForm > * {
+   font: 1.4em 'Unkempt', sans-serif; 
+ }
+ .myForm {
+  display: grid;
+  grid-template-columns: [labels] auto [controls] 1fr;
+  grid-auto-flow: row;
+  grid-gap: .8em .5em;
+  background: beige;
+  padding: 1.2em;
+  width: 36em;
+}
+.myForm > label,
+.myForm > fieldset  {
+  grid-column: labels;
+  grid-row: auto;
+}
+.myForm > input, 
+.myForm > select,
+.myForm > textarea {
+  grid-column: controls;
+  grid-row: auto;
+  padding: .4em;
+  border: 0;
+}
+.myForm > fieldset,
+.myForm > button {
+  grid-column: span 2;
+}  
+.myForm > button {
+  padding: 1em;
+  background: darkkhaki;
+  border: 0;
+  color: white;
+}
+.myForm > textarea {
+  min-height: 3em;
+}
+</style>
+</head><body>
+
+  <script>
+// function myFunction() {
+// 	var e = document.getElementById("pickup_place1");
+// 	var strUser = e.options[e.selectedIndex].value;
+//     document.getElementById("demo").innerHTML = strUser;
+
+// }
+
+
+// function writeToTextFile() {
+//  	set fso = CreateObject("Scripting.FileSystemObject"); 
+//     set s   = fso.CreateTextFile("C:\Users\Stn020\Desktop\2101\filename.txt", True);
+
+// 	var e = document.getElementById("pickup_place1");
+// 	var strUser = e.options[e.selectedIndex].value;
+//     document.getElementById("demo").innerHTML = strUser;
+
+//     s.writeline("First Name :" + strUser);
+//     s.writeline("Last Name :" + strUser);
+
+//     s.writeline("-----------------------------");
+//     s.Close();
+// }
+var levelS;
+var dayS;
+var mapS;
+var vehicleS;
+var pedestrianS;
+
+
+$( "#levelSelect" ).change(function() {
+  levelS = this.value;
+            // update to db
+          });
+
+$( "#daySelect" ).change(function() {
+  dayS = this.value;
+            // update to db
+          });
+
+$( "#mapSelect" ).change(function() {
+  mapS = this.value;
+            // update to db
+          });
+
+$( "#vehicleSelect" ).change(function() {
+  vehicleS = this.value;
+            // update to db
+          });
+
+$( "#pedestrianSelect" ).change(function() {
+  pedestrianS = this.value;
+            // update to db
+          });
+
+
+
+
+function update(){
+
+  var xhr = new XMLHttpRequest();
+  xhr.timeout = 2000;
+
+  xhr.onreadystatechange = function(e){   
+
+          // console.log(this);
+          if (xhr.readyState === 4){
+            if (xhr.status === 200){
+
+            // filter out the key value pairs u need
+            res = JSON.parse(xhr.response);    
+                        
+            console.log(res);
+
+            xhr.ontimeout = function (){
+              console.error("request timedout: ", xhr);
+            }
+
+          }
+        }
+      }
+      var selectedLevelValue = $('#levelSelect').val();
+      var selectedDayNightValue = $('#daySelect').val();
+      var selectedMapValue = $('#mapSelect').val();
+      var selectedVehValue = $('#vehicleSelect').val();
+      var selectedPedValue = $('#pedestrianSelect').val();
+
+      // to detect newly selected level
+
+      if(selectedLevelValue == 1){
+        levelS = 'Level One';
+      }
+      else if(selectedLevelValue == 2){
+        levelS = 'Level Two';
+      }
+      else if(selectedLevelValue == 3){
+        levelS = 'Level Three';
+      }
+      else if(selectedLevelValue == 4){
+        levelS = 'Level Four';
+      }
+      else {
+        levelS = 'Level Five';
+      }
+
+
+      if(selectedDayNightValue == 1){
+        dayS = 'Day';
+      }
+      else {
+        dayS = 'Night';      
+      }
+      
+
+      if(selectedMapValue == 1){
+        mapS = 'Small';
+      }
+      else if(selectedMapValue == 2){
+        mapS = 'Middle';
+      }
+      else {
+        mapS = 'Large';      
+      }
+
+
+      if(selectedVehValue == 1){
+        vehicleS = 5;
+      }
+      else if(selectedVehValue == 2){
+        vehicleS = 6;
+      }
+      else if(selectedVehValue == 3){
+        vehicleS = 7;
+      }
+      else if(selectedVehValue == 4){
+        vehicleS = 8;
+      }
+      else if(selectedVehValue == 5){
+        vehicleS = 9;
+      }
+      else{
+        vehicleS = 10;
+      }
+
+
+      if(selectedPedValue == 1){
+        pedestrianS = 5;
+      }
+      else if(selectedPedValue == 2){
+        pedestrianS = 6;
+      }
+      else if(selectedPedValue == 3){
+        pedestrianS = 7;
+      }
+      else if(selectedPedValue == 4){
+        pedestrianS = 8;
+      }
+      else if(selectedPedValue == 5){
+        pedestrianS = 9;
+      }
+      else{
+        pedestrianS = 10;
+      }
+
+     
+      xhr.open("get", "http://localhost:3000/testing/"+levelS+"/"+dayS+"/"+mapS+"/"+parseInt(vehicleS)+"/"+parseInt(pedestrianS), /*async*/ true);
+      xhr.send();
+
+      alert('Updated Successfully!');
+    }
+    
+
+
+    var xhr = new XMLHttpRequest();
+    xhr.timeout = 2000;
+    xhr.onreadystatechange = function(e){
+          // console.log(this);
+          if (xhr.readyState === 4){
+            if (xhr.status === 200){            
+            // filter out the key value pairs u need
+            res = JSON.parse(xhr.response);    
+            // Use performTask to plot N amount of pins at a time (every 10ms)
+            
+            // Testing remove marker
+            console.log(res);
+
+            levelS = res[0].level;
+            dayS = res[0].day_night;
+            mapS = res[0].map;
+            vehicleS = res[0].vehicle;
+            pedestrianS = res[0].pedestrian;
+
+            switch(res[0].level) {
+              case 'Level One':
+              $('#levelSelect').val('1');
+              break;
+              case 'Level Two':
+              $('#levelSelect').val('2');
+              break;
+              case 'Level Three':
+              $('#levelSelect').val('3');
+              break;
+              case 'Level Four':
+              $('#levelSelect').val('4');
+              break;
+              case 'Level Five':
+              $('#levelSelect').val('5');
+              break;
+              default:
+              $('#levelSelect').val('1');
+            }
+
+            switch(res[0].day_night) {
+              case 'Day':
+              $('#daySelect').val('1');
+              break;
+              case 'Night':
+              $('#daySelect').val('2');
+              break;
+              default:
+              $('#daySelect').val('1');
+            }
+
+            switch(res[0].map) {
+              case 'Small':
+              $('#mapSelect').val('1');
+              break;
+              case 'Middle':
+              $('#mapSelect').val('2');
+              break;
+              case 'Large':
+              $('#mapSelect').val('3');
+              break;
+              default:
+              $('#mapSelect').val('1');
+            }
+
+            switch(res[0].vehicle) {
+              case 5:
+              $('#vehicleSelect').val('1');
+              break;
+              case 6:
+              $('#vehicleSelect').val('2');
+              break;
+              case 7:
+              $('#vehicleSelect').val('3');
+              break;
+              case 8:
+              $('#vehicleSelect').val('4');
+              break;
+              case 9:
+              $('#vehicleSelect').val('5');
+              break;
+              case 10:
+              $('#vehicleSelect').val('6');
+              break;
+              default:
+              $('#vehicleSelect').val('1');
+            }
+            switch(res[0].pedestrian) {
+              case 5:
+              $('#pedestrianSelect').val('1');
+              break;
+              case 6:
+              $('#pedestrianSelect').val('2');
+              break;
+              case 7:
+              $('#pedestrianSelect').val('3');
+              break;
+              case 8:
+              $('#pedestrianSelect').val('4');
+              break;
+              case 9:
+              $('#pedestrianSelect').val('5');
+              break;
+              case 10:
+              $('#pedestrianSelect').val('6');
+              break;
+              default:
+              $('#pedestrianSelect').val('1');
+            }
+
+
+
+
+          } else {
+            console.error("XHR didn't work: ", xhr.status);
+          }
+        }
+      }
+      xhr.ontimeout = function (){
+        console.error("request timedout: ", xhr);
+      }
+      xhr.open("get", "http://localhost:3000/environment/", /*async*/ true);
+      xhr.send();
+
+
+
+    </script>
+    <form class="myForm">
+
+      <label for="pickup_place">Level Select</label>
+      <select name="pickup_place" id="levelSelect" >
+        <!-- <option selected="selected" id="level1"></option> -->
+        <option value="1">Level One</option>
+        <option value="2">Level Two</option>
+        <option value="3">Level Three</option>
+        <option value="4">Level Four</option>
+        <option value="5">Level Five</option>
+      </select>
+
+      <label for="pickup_place">Day/Night</label>
+      <select name="pickup_place" id="daySelect">
+        <option value="1">Day</option>
+        <option value="2">Night</option>
+      </select>
+
+      <label for="pickup_place">Map</label>
+      <select name="pickup_place" id="mapSelect">
+        <option value="1">Small</option>
+        <option value="2">Middle</option>
+        <option value="3">Large</option>
+      </select>
+
+      <label for="pickup_place">Number Of Vehicle</label>
+      <select name="pickup_place" id="vehicleSelect">
+        <option value="1">5</option>
+        <option value="2">6</option>
+        <option value="3">7</option>
+        <option value="4">8</option>
+        <option value="5">9</option>
+        <option value="6">10</option>
+      </select>
+
+      <label for="pickup_place">Number Of Pedestrain</label>
+      <select name="pickup_place" id="pedestrianSelect">
+        <option value="1">5</option>
+        <option value="2">6</option>
+        <option value="3">7</option>
+        <option value="4">8</option>
+        <option value="5">9</option>
+        <option value="6">10</option>
+      </select>
+
+      <button type="button" id="Submit" onclick="update();">Confirm</button>
+
+
+    </form> 
+    <!-- <script src="function.js"></script> -->
+  </body></html>
