@@ -1,78 +1,747 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-
-    <title>ICT2201-M4</title>
-    <meta name="description" content="ICT2201-M4 A-Frame">
-    <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
-    <script src="https://unpkg.com/aframe-animation-component@^5.1.2/dist/aframe-animation-component.min.js"></script>
-    <script src="https://rawgit.com/feiss/aframe-environment-component/master/dist/aframe-environment-component.min.js"></script>
-    <script src="//cdn.rawgit.com/donmccurdy/aframe-physics-system/v3.2.0/dist/aframe-physics-system.min.js"></script>
-    <script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v4.2.0/dist/aframe-extras.min.js"></script>
-</head>
+  <meta charset="utf-8">
   
-  <body>
-     
-      <!-- Scene -->
-      <a-scene>
+  <title>ICT2201-M4</title>
+  <meta name="description" content="ICT2201-M4 A-Frame">
+  <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
+  <script src="https://rawgit.com/feiss/aframe-environment-component/master/dist/aframe-environment-component.min.js"></script>
+  <script src="//cdn.rawgit.com/donmccurdy/aframe-physics-system/v3.2.0/dist/aframe-physics-system.min.js"></script>
+  <script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v4.2.0/dist/aframe-extras.min.js"></script>
+  <script src="https://unpkg.com/aframe-aabb-collider-component@^2.2.1/dist/aframe-aabb-collider-component.min.js"></script>
+  <!-- <script src="https://recast-api.donmccurdy.com/aframe-inspector-plugin-recast.js"></script> -->
+</head>
 
-          <a-assets>
-              <a-asset-item id="scene" src="scene.gltf"> </a-asset-item>
-              <a-asset-item id="car" src="/ICT2201_M4_aframe/car/car.gltf"> </a-asset-item>
-              <a-asset-item id="bicycle" src="/ICT2201_M4_aframe/dirt_bicycle_3d_model/bicycle.gltf"> </a-asset-item>
-              <a-asset-item id="city" src="/ICT2201_M4_aframe/tiny_city/tiny.gltf"> </a-asset-item>
-              <a-asset-item id="pedesterian" src="/ICT2201_M4_aframe/running/run.gltf"></a-asset-item>
-              <a-asset-item id="scooter" src="/ICT2201_M4_aframe/razor_scooter/scooter.gltf"> </a-asset-item>
-          </a-assets>
-
-
-          <a-gltf-model src="#city" position="0 13 0" scale="30 30 30 "></a-gltf-model>
-
-          <a-entity environment skyColor="blue"></a-entity>
-          <!-- Using the asset management system. -->
-          <a-grid static-body></a-grid>
-          <!-- Defining the URL inline. Not recommended but more comfortable for web developers. -->
-
-
-          <a-gltf-model src="#car" static-body="sphereRadius:NaN" position="-19.432100807788746 -0.1032842164301151 14.869613592836474" scale="0.01 0.01 0.01" rotation="-0.7078002336448206 0 0" gltf-model="/ICT2201_M4_aframe/car/car.gltf" velocity="5 0 0">
-
-
-              <a-animation mixer="" attribute="rotation" dur="10000" velocity="0 0 0 " fill="forwards" from="-1 0 0" to="0.3 0 0" repeat="indefinite" direction="normal">
-              </a-animation>
-          </a-gltf-model>
-
-          <a-gltf-model src="#car" static-body="sphereRadius:NaN" position="-1.102 -0.003 14.127" scale="0.01 0.01 0.01" rotation="-0.7078002336448206 90.010 0" gltf-model="/ICT2201_M4_aframe/car/car.gltf" velocity="5 0 0">
-
-              <a-animation mixer="" attribute="rotation" dur="10000" velocity="0 0 0 " fill="forwards" from="-1 0 0" to="0.3 0 0" repeat="indefinite" direction="normal">
-              </a-animation>
-
-
-          </a-gltf-model>
-
-          <a-gltf-model src="#car" static-body="sphereRadius:NaN" position="-16.787 -0.103 5.220" scale="0.01 0.01 0.01" rotation="-0.7078002336448206 0 0" gltf-model="/ICT2201_M4_aframe/car/car.gltf" velocity="5 0 0">
-
-              <a-animation mixer="" attribute="rotation" dur="10000" velocity="0 0 0 " fill="forwards" from="-1 0 0" to="0.3 0 0" repeat="indefinite" direction="normal">
-              </a-animation>
+<body>
+  <!-- <a-scene inspector-plugin-recast> -->
+    <a-scene shadow="autoUpdate: false">
+      <a-assets>
+        <a-asset-item id="scene" src="/ICT2201-master1/ICT2201_M4_aframe/scene.gltf"> </a-asset-item>
+        <a-asset-item id= "car1" src="/ICT2201-master1/ICT2201_M4_aframe/car/car.gltf"> </a-asset-item>
+        <a-asset-item id= "car2" src="/ICT2201-master1/ICT2201_M4_aframe/car/car.gltf"> </a-asset-item>
+        <a-asset-item id= "car3" src="/ICT2201-master1/ICT2201_M4_aframe/car/car.gltf"> </a-asset-item>
+        <a-asset-item id= "bicycle" src="/ICT2201-master1/ICT2201_M4_aframe/dirt_bicycle_3d_model/bicycle.gltf"> </a-asset-item>
+        <!--a-asset-item id= "city" src="/ICT2201-master/ICT2201_M4_aframe/tiny_city/own_model/model2.gltf"> </!--a-asset-item>-->>
+        <a-asset-item id= "pedesterian1" src="/ICT2201-master1/ICT2201_M4_aframe/people1/scene.gltf"></a-asset-item>
+        <a-asset-item id= "pedesterian2" src="/ICT2201-master1/ICT2201_M4_aframe/people1/scene.gltf"></a-asset-item>
+        <a-asset-item id= "city" src="/ICT2201-master1/ICT2201_M4_aframe/tiny_city/tiny8.gltf"> </a-asset-item>
+        <a-asset-item id="scooter" src="/ICT2201-master1/ICT2201_M4_aframe/razor_scooter/scooter.gltf"> </a-asset-item>
+        <!-- <a-asset-item id="people" src="/ICT2201-master/ICT2201_M4_aframe/people/scene.gltf"> </a-asset-item> -->
+      </a-assets>
+      <a-entity environment skyColor="blue"></a-entity>
+      <!-- Using the asset management system. -->
+      <a-grid static-body position="0 0 0" scale="80 80 80"></a-grid>
+      <!-- Defining the URL inline. Not recommended but more comfortable for web developers. -->
+      <a-gltf-model src="car1" position="0 0.7 -1"  scale="0.01 0.013 0.01" ></a-gltf-model>
+      <a-gltf-model src="car2" position="0 0.7 -1"  scale="0.01 0.013 0.01" ></a-gltf-model>
+      
 
 
-          </a-gltf-model>
+      <!-- <a-entity static-body gltf-model="#pedesterian" rotation="0 180 0" scale="0.013 0.013 0.013"></a-entity> -->
+      <!--  LEVEL 1 WOMAN WALKING START -->
+      <a-gltf-model rotation= "0 90 0" id="crazyfrog" src="#pedesterian1" position="0 2 0"  scale="0.010 0.010 0.010" animation-mixer>
+        <a-animation
+        attribute="position"
+        to="50 0.7 45"
+        from="0 0.7 45"
+        dur="15000"
+        repeat="indefinite"
+        direction="normal"
+        >
+      </a-gltf-model>
 
-          <a-gltf-model src="#bicycle" static-body position="6.962 2 -0.886" scale="1 1 1">
+      <a-box class="box" rotation = " 0 0 0" bound-collider2="" color="black" depth="0.5" width="0.5" height="0.5">
+        <a-animation
+          attribute="position"
+          to="50 0.7 45"
+          from="0 0.7 45"
+          dur="15000"
+          repeat="indefinite"
+          direction="normal"
+          >
+        </a-animation>  
+      </a-box>
+      <!-- LEVEL 1 WOMAN WALKING END -->
 
-          </a-gltf-model>
-          <a-entity id="rig" movement-controls kinematic-body>
-              <a-entity camera universal-controls gltf-model src="#bicycle"
-                        position="0 1.6 0"
-                        look-controls="pointerLockEnabled: true"></a-entity>
+      <!--  LEVEL 5 CARS START -->
+      <a-entity static-body gltf-model="#car1" position="-8 0 -9" rotation="0 90 0" scale="0.013 0.013 0.013">
+        <a-animation
+        attribute="position"
+        to="5 0.7 -18"
+        from="5 0.7 40"
+        dur="10000"
+        repeat="indefinite"
+        direction="normal"
+        >
+        </a-animation>  
+      </a-entity>
+      <a-box class="box" rotation = " 0 0 0" bound-collider5="" color="black" depth="5" width="2" height="2">
+        <a-animation
+          attribute="position"
+          to="5 0.7 -18"
+          from="5 0.7 40"
+          dur="10000"
+          repeat="indefinite"
+          direction="normal"
+          >
+        </a-animation>  
+      </a-box>
+      <a-entity static-body gltf-model="#car2" position="-8 0 -9" rotation="0 0 0" scale="0.013 0.013 0.013">
+        <a-animation
+          attribute="position"
+          to="15 0.7 -25"
+          from="-28 0.7 -25"
+          dur="10000"
+          repeat="indefinite"
+          direction="normal"
+          >
+        </a-animation>
+      </a-entity>
+      <a-box class="box" rotation = " 0 0 0" bound-collider5="" color="black" depth="2" width="5" height="2">
+          <a-animation
+          attribute="position"
+          to="15 0.7 -25"
+          from="-28 0.7 -25"
+          dur="10000"
+          repeat="indefinite"
+          direction="normal"
+          >
+        </a-animation>
+      </a-box>
+  <!--  LEVEL 5 CARS END -->
+  <!--  LEVEL 3 CARS & WALKING START -->
+      <a-entity static-body gltf-model="#car3" position="-8 0 -9" rotation="0 90 0" scale="0.013 0.013 0.013">
+        <a-animation
+        attribute="position"
+        to="-35 0.7 15"
+        from="-35 0.7 38"
+        dur="10000"
+        repeat="indefinite"
+        direction="normal"
+        >
+        </a-animation>  
+      </a-entity>
+      <a-box class="box" rotation = " 0 0 0" bound-collider5="" color="black" depth="5" width="2" height="2">
+        <a-animation
+          attribute="position"
+          to="-35 0.7 15"
+          from="-35 0.7 38"
+          dur="10000"
+          repeat="indefinite"
+          direction="normal"
+          >
+        </a-animation>  
+      </a-box>
+
+      <a-gltf-model rotation= "0 -90 0" id="crazyfrog2" src="#pedesterian2" position="0 2 0"  scale="0.010 0.010 0.010" animation-mixer>
+        <a-animation
+        attribute="position"
+        to="-40 0.7 -13"
+        from="-32 0.7 -13"
+        dur="15000"
+        repeat="indefinite"
+        direction="normal"
+        >
+      </a-gltf-model>
+
+      <a-box class="box" rotation = " 0 0 0" bound-collider2="" color="black" depth="0.5" width="0.5" height="0.5">
+        <a-animation
+          attribute="position"
+          to="-40 0.7 -13"
+          from="-32 0.7 -13"
+          dur="15000"
+          repeat="indefinite"
+          direction="normal"
+          >
+        </a-animation>  
+      </a-box>
+  <!--  LEVEL 3 CARS & WALKING END -->
+
+  <!-- <a-gltf-model src="#people" position="0 0.7 -3"  scale="0.08 0.08 0.08" ></a-gltf-model> -->
+  <a-light color="white" position="-1 1 0"></a-light>
+  <a-gltf-model src="#city" position="6.962 0.57 10" scale="60 60 60" ></a-gltf-model>
+
+<!-- ORIGINAL CAMERA START -->
+  <!-- <a-entity id="rig" movement-controls  kinematic-body position="-3 2 -1"> -->
+
+    <!-- <a-entity  camera position="0 1.9 2" wasd-controls look-controls="pointerLockEnabled: true"> -->
+      <!-- <a-entity id="rig1" movement-controls position="-3 0.7 -1"> -->
+        <a-entity  camera="active: false" position="35 1.9 -6" wasd-controls look-controls="pointerLockEnabled: true">  
+        <!-- <a-entity  camera position="0 1.9 2" wasd-control look-controls="pointerLockEnabled: true">   -->
+          <!-- <a-light color="white" position="0 5 0"></a-light>
+          <a-light color="white" position="0 4 0"></a-light>
+          <a-light color="white" position="0 3 0"></a-light>
+          <a-light color="white" position="0 2 0"></a-light>
+          <a-light color="white" position="0 1 0"></a-light>
+          <a-light color="white" position="0 0 0"></a-light> -->
+        </a-entity>
+      <!-- </a-entity> -->
+    <!-- </a-entity> -->
+  <!-- </a-entity> -->
+<!-- ORIGINAL CAMERA END -->
+      <a-entity position="65.253 1.9 44.289" rotation="0 90 0" id="level1-camera1"></a-entity>
+
+      
+
+      <a-entity position="-52 1.9 36" rotation="0 270 0" id="level2-camera1"></a-entity>
+
+      
+
+      <a-entity position="-20 1.9 38" rotation="0 0 0" id="level3-camera1"></a-entity>
+
+
+
+      <a-entity position="46.8 1.9 -25" rotation="0 180 0" id="level4-camera1"></a-entity>
+
+
+
+      <a-entity position="2.4 1.9 -5" rotation="0 0 0" id="level5-camera1"></a-entity>
+
+      
+
+
+      <!-- menu -19 1.9 -38  -->
+      <!-- MENU CAMERA START  wasd-controls="enabled:false"-->
+      <a-entity id="menu-camera1" movement-controls="enabled:false" position="-19 1.9 -38" rotation= "0 180 0">
+        <a-entity camera id="menu-camera2" look-controls="pointerLockEnabled: true" >
+          <a-entity cursor="fuse: true; fuseTimeout: 1000;" material="color:red; shader:flat" position="0 -0 -1" geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03" rotation = "0 0 0">
+            <a-animation begin="click" easing="ease-in" attribute="scale" dur="150" fill="forwards" from="0.1 0.1 0.1" to="1 1 1"></a-animation>
+            <a-animation begin="cursor-fusing" easing="ease-in" attribute="scale" dur="1500" fill="backwards" from="1 1 1" to="0.1 0.1 0.1"></a-animation>
           </a-entity>
+        </a-entity>
+      </a-entity>
 
-      </a-scene>
-      var npcEl = document.querySelector('#npc');
-      npcEl.setAttribute('nav-agent', {
-      active: true,
-      destination: e.detail.intersection.point
+      <a-plane position="-19 3.7 -34.7" color="#blue" height="0.7" width="2" rotation="0 180 0" ><a-text position="-0.3 0 0" value="Aegis"></a-text></a-plane>
+
+      <a-plane game-start position="-17 1.9 -34.7" color="#blue" height="0.7" width="1.4" rotation="0 180 0" ><a-text position="-0.55 0 0" value="Play Game"></a-text></a-plane>
+
+      <a-plane highscore position="-21 1.9 -34.7" color="#blue" height="0.7" width="1.4" rotation="0 180 0" ><a-text position="-0.55 0 0" value="Highscore"></a-text></a-plane>
+      <!-- MENU CAMERA END  -->
+
+
+
+
+
+      <!-- SELECT PMD CAMERA START PROBLEM-->
+      <!-- <a-entity position="-28 1.9 -31.5" rotation="0 270 0">
+        <a-entity camera="active: false" id="pmdSelection-camera1" look-controls="pointerLockEnabled: true"wasd-controls >
+          <a-gltf-model src="#bicycle"scale="1 1 1" position="0 -0.60 0"rotation="26.5 180 0"></a-gltf-model>
+        </a-entity>
+      </a-entity>
+
+
+      <a-plane position="-24 1.9 -31.5" color="#blue" height="1" width="2" rotation="0 270 0" ><a-text position="-0.3 0 0" value="Ageis"></a-text></a-plane>
+
+      <a-plane position="-24 1.9 -31.5" color="#blue" height="1" width="2" rotation="0 270 0" ><a-text position="-0.3 0 0" value="Ageis"></a-text></a-plane>
+
+      <a-plane position="-24 1.9 -35" color="#blue" height="1" width="2" rotation="0 270 0" ><a-text position="-0.3 0 0" value="Ageis"></a-text></a-plane> -->
+
+      <!-- SELECT PMD CAMERA END  PROBLEM-->
+
+
+
+
+
+      <!-- SELECT LEVEL CAMERA START -->
+      <a-entity position="-19 1.9 -23" rotation="0 0 0">
+        <a-entity camera="active: false" id="levelSelection-camera1" look-controls="pointerLockEnabled: true"></a-entity>
+      </a-entity>
+
+      <a-plane position="-19 5 -28.7" color="#blue" height="1" width="2" rotation="0 0 0" ><a-text position="-0.6 0 0" value="Select Level"></a-text></a-plane>
+
+      <a-plane level-three position="-19 3.9 -28.7" color="#blue" height="0.5" width="1" rotation="0 0 0" ><a-text position="-0.35 0 0" value="Level 3"></a-text></a-plane>
+
+      <a-plane level-one position="-20.5 1.7 -28.7" color="#blue" height="0.5" width="1" rotation="0 0 0" ><a-text position="-0.35 0 0" value="Level 1"></a-text></a-plane>
+
+      <a-plane level-five position="-17.5 1.7 -28.7" color="#blue" height="0.5" width="1" rotation="0 0 0" ><a-text position="-0.35 0 0" value="Level 5"></a-text></a-plane>
+      
+      <a-plane level-two position="-21 2.9 -28.7" color="#blue" height="0.5" width="1" rotation="0 0 0" ><a-text position="-0.35 0 0" value="Level 2"></a-text></a-plane>
+
+      <a-plane level-four position="-17 2.9 -28.7" color="#blue" height="0.5" width="1" rotation="0 0 0" ><a-text position="-0.35 0 0" value="Level 4"></a-text></a-plane>
+
+
+      <!-- SELECT LEVEL CAMERA END -->
+
+
+      <!-- HIGHSCORE CAMERA START -->
+      <a-entity position="-11 1.9 -31.9" rotation="0 90 0">
+        <a-entity camera="active: false" id="highscore-camera1" look-controls="pointerLockEnabled: true"></a-entity>
+      </a-entity>
+
+      <a-plane position="-16 5.6 -31.8" color="#blue" height="0.6" width="2" rotation="0 90 0" ><a-text position="-0.5 0 0" value="Highscore"></a-text></a-plane>
+
+      <a-plane position="-16 3.4 -31.8" color="#blue" height="3.6" width="3" rotation="0 90 0" ><a-text position="-0.5 0 0" value="Darren         90\nKelvin          80\nIvan             70\nDohnny       70\nChek            60"></a-text></a-plane>
+
+      <a-plane main-menu position="-16 1.25 -34" color="#blue" height="0.5" width="1" rotation="0 90 0" ><a-text position="-0.3 0 0" value="Back"></a-text></a-plane>
+
+      <!-- HIGHSCORE CAMERA END -->
+
+      <!-- PMD SELECT START  -->
+      <a-entity position="44 1.9 -35.7" rotation="0 90 0">
+        <a-entity camera="active: false" id="pmdSelection-camera1" look-controls="pointerLockEnabled: true"></a-entity>
+      </a-entity>
+
+      <a-plane position="39.5 5 -35.7" color="#blue" height="1" width="2" rotation="0 90 0" ><a-text position="-0.55 0 0" value="Select PMD"></a-text></a-plane>
+
+      <a-plane pmd-scootor position="39.5 1.9 -33.7" color="#blue" height="1" width="2" rotation="0 90 0" ><a-text position="-0.4 0 0" value="Scooter"></a-text></a-plane>
+
+      <a-plane pmd-bicycle position="39.5 1.9 -37.7" color="#blue" height="1" width="2" rotation="0 90 0" ><a-text position="-0.35 0 0" value="Bicycle"></a-text></a-plane>
+      <!-- PMD SELECT END  -->
+
+      <!-- END GAME PAGE START  -->
+      <a-entity position="-13.5 1.9 -2" rotation="0 0 0">
+        <a-entity camera="active: false" id="endGamePage-camera1" look-controls="pointerLockEnabled: true">
+        </a-entity>
+      </a-entity>
+
+      <a-plane position="-13.5 5 -6.2" color="#blue" height="0.7" width="2" rotation="0 0 0" ><a-text position="-0.87 0 0" value="Game Completed"></a-text></a-plane>
+
+      <a-plane position="-13.5 3.5 -6.2" color="#blue" height="0.7" width="2" rotation="0 0 0" ><a-text id="end" position="-0.55 0 0" value="Score: "></a-text></a-plane>
+
+      <a-plane game-start position="-12 1.9 -6.2" color="#blue" height="0.5" width="1.5" rotation="0 0 0" ><a-text position="-0.52 0 0" value="Play again"></a-text></a-plane>
+
+      <a-plane main-menu position="-15 1.9 -6.2" color="#blue" height="0.5" width="1.5" rotation="0 0 0" ><a-text position="-0.58 0 0" value="Main menu"></a-text></a-plane>
+      <!-- END GAME PAGE END  -->
+
+      <!-- COLLIDERS -->
+      <!-- LEVEL 1 COLLIDER  -->
+      <a-box class="box" rotation = " 0 0 0" bound-collider="" color="black" depth="2.5" width="0.1" height="0.1" position="-15.6 1.71 44.45" ></a-box>  
+      <!-- LEVEL 5 COLLIDER  -->
+      <a-box class="box" rotation = " 0 90 0" bound-collider="" color="black" depth="2.5" width="0.1" height="0.1" position="18.6 1.7 -39.35" ></a-box>
+      <!-- LEVEL 2 COLLIDER  -->
+      <a-box class="box" rotation = " 0 90 0" bound-collider="" color="black" depth="2.5" width="0.1" height="0.1" position="-20.6 1.7 59.18" ></a-box>
+
+      <!-- LEVEL 3 COLLIDER  -->
+      <a-box class="box" rotation = " 0 0 0" bound-collider="" color="black" depth="2.5" width="0.1" height="0.1" position="-29.98 1.7 -20.25" ></a-box>
+
+      <!-- LEVEL 4 COLLIDER  -->
+      <a-box class="box" rotation = " 0 0 0" bound-collider="" color="black" depth="2.5" width="0.1" height="0.1" position="-3.45 1.7 14.7" ></a-box>
+
+      <!-- LEVEL 1 SPECIAL -->
+      <a-box class="box" bound-collider3="" rotation = " 0 0 0" color="black" depth="1.4" width="83" height="0.1" position="25 0.7 45.2" ></a-box> 
+      <a-box class="box" bound-collider4="" rotation = " 0 0 0" color="white" depth="1.4" width="83" height="0.1" position="25 0.7 43.7" ></a-box> 
+
+
+
+
+
+
+      <!-- 18 1.9 -36 -->
+    </a-scene> 
+
+
+
+
+    <script>
+
+
+      var scorepoint = 100;
+
+
+
+
+
+  // Component to change to a sequential color on click.
+  AFRAME.registerComponent('cursor-listener', {
+    init: function () {
+      var lastIndex = -1;
+      var COLORS = ['red', 'green', 'blue'];
+      this.el.addEventListener('click', function (evt) {
+        lastIndex = (lastIndex + 1) % COLORS.length;
+        this.setAttribute('material', 'color', COLORS[lastIndex]);
+        console.log('I was clicked at: ', evt.detail.intersection.point);
+      });
+    }
+  });
+  
+  
+  AFRAME.registerComponent('level-one', {
+    init: function () {
+      this.el.addEventListener('click', function (evt) {
+
+        document.getElementById('menu-camera1').setAttribute('position', {x:35, y:1.9, z:-6});
+        document.getElementById('menu-camera1').setAttribute('rotation', {x:0, y:-8, z:0});
+        var pmd2 = document.createElement("a-text"); 
+        pmd2.setAttribute("id","score");
+        pmd2.setAttribute("value","score: 100");
+        pmd2.setAttribute("color","red");
+        pmd2.setAttribute("width","4");
+        pmd2.setAttribute("height","4");
+        pmd2.setAttribute("position","1.2 1.1 -1.5");
+        document.getElementById('menu-camera2').appendChild(pmd2);
+        document.getElementById('menu-camera1').setAttribute("movement-controls","enabled:true");
+
+
+
+        setTimeout(function(){
+          document.getElementById('menu-camera1').setAttribute('position', {x:65.253, y:1.9, z:44.289});
+          document.getElementById('menu-camera1').setAttribute('rotation', {x:0, y:75, z:0});
+          document.getElementById('menu-camera2').setAttribute('position', {x:0, y:0, z:0});
+          document.getElementById('menu-camera2').setAttribute('rotation', {x:0, y:0, z:0});
+        },3000);
+
+      
+
+
+
+      });
+    }
+  });
+  
+  AFRAME.registerComponent('level-two', {
+    init: function () {
+      this.el.addEventListener('click', function (evt) {
+        document.getElementById('menu-camera1').setAttribute('position', {x:35, y:1.9, z:-6});
+        document.getElementById('menu-camera2').setAttribute('position', {x:0, y:0, z:0});
+        var pmd2 = document.createElement("a-text"); 
+        pmd2.setAttribute("id","score");
+        pmd2.setAttribute("value","score: 100");
+        pmd2.setAttribute("color","red");
+        pmd2.setAttribute("width","4");
+        pmd2.setAttribute("height","4");
+        pmd2.setAttribute("position","1.2 1.1 -1.5");
+        document.getElementById('menu-camera2').appendChild(pmd2);
+        document.getElementById('menu-camera1').setAttribute("movement-controls","enabled:true");
+
+        setTimeout(function(){
+          document.getElementById('menu-camera1').setAttribute('position', {x:-52, y:1.9, z:36});
+          document.getElementById('menu-camera1').setAttribute('rotation', {x:0, y:-90, z:0});
+        },3000);
+
+      });
+    }
+  });
+  
+  AFRAME.registerComponent('level-three', {
+    init: function () {
+      this.el.addEventListener('click', function (evt) {
+        document.getElementById('menu-camera1').setAttribute('position', {x:35, y:1.9, z:-6});
+        document.getElementById('menu-camera2').setAttribute('position', {x:0, y:0, z:0});
+        var pmd2 = document.createElement("a-text");
+        pmd2.setAttribute("id","score");
+        pmd2.setAttribute("value","score: 100");
+        pmd2.setAttribute("color","red");
+        pmd2.setAttribute("width","4");
+        pmd2.setAttribute("height","4");
+        pmd2.setAttribute("position","1.2 1.1 -1.5");
+        document.getElementById('menu-camera2').appendChild(pmd2);
+        document.getElementById('menu-camera1').setAttribute("movement-controls","enabled:true");
+
+        setTimeout(function(){
+          document.getElementById('menu-camera1').setAttribute('position', {x:-20, y:1.9, z:38});
+        },3000);
+
+      });
+    }
+  });
+  
+  AFRAME.registerComponent('level-four', {
+    init: function () {
+      this.el.addEventListener('click', function (evt) {
+        document.getElementById('menu-camera1').setAttribute('position', {x:35, y:1.9, z:-6});
+        document.getElementById('menu-camera2').setAttribute('position', {x:0, y:0, z:0});
+        var pmd2 = document.createElement("a-text"); 
+        pmd2.setAttribute("id","score");
+        pmd2.setAttribute("value","score: 100");
+        pmd2.setAttribute("color","red");
+        pmd2.setAttribute("width","4");
+        pmd2.setAttribute("height","4");
+        pmd2.setAttribute("position","1.2 1.1 -1.5");
+        document.getElementById('menu-camera2').appendChild(pmd2);
+        document.getElementById('menu-camera1').setAttribute("movement-controls","enabled:true");
+
+        setTimeout(function(){
+          document.getElementById('menu-camera1').setAttribute('position', {x:46.8, y:1.9, z:-25});
+          document.getElementById('menu-camera1').setAttribute('rotation', {x:0, y:160, z:0});
+        },3000);
+
+      });
+    }
+  });
+  
+  AFRAME.registerComponent('level-five', {
+    init: function () {
+      this.el.addEventListener('click', function (evt) {
+        document.getElementById('menu-camera1').setAttribute('position', {x:35, y:1.9, z:-6});
+        document.getElementById('menu-camera2').setAttribute('position', {x:0, y:0, z:0});
+
+        var pmd2 = document.createElement("a-text"); 
+        pmd2.setAttribute("id","score");
+        pmd2.setAttribute("value","score: 100");
+        pmd2.setAttribute("color","red");
+        pmd2.setAttribute("width","4");
+        pmd2.setAttribute("height","4");
+        pmd2.setAttribute("position","1.2 1.1 -1.5");
+        document.getElementById('menu-camera2').appendChild(pmd2);
+        document.getElementById('menu-camera1').setAttribute("movement-controls","enabled:true");
+
+        setTimeout(function(){
+          document.getElementById('menu-camera1').setAttribute('position', {x:2.4, y:1.9, z:-5});
+        },3000);
+
+      });
+    }
+  });
+  
+  AFRAME.registerComponent('pmd-bicycle', {
+    init: function () {
+      console.log("bicycle function");
+      this.el.addEventListener('click', function (evt) {
+
+        var pmd = document.createElement("a-box"); 
+        pmd.setAttribute("id","vehicle1");
+        pmd.setAttribute("gltf-model","#bicycle");
+        pmd.setAttribute("scale","1 1 1");
+        pmd.setAttribute("position","0 -0.60 0");
+        pmd.setAttribute("rotation","26.5 180 0");
+        pmd.setAttribute("aabb-collider","objects:a-box");
+        document.getElementById('menu-camera2').appendChild(pmd);
+        console.log("test bicycle");
+        document.getElementById('menu-camera1').setAttribute('position', {x:-19, y:1.9, z:-23});
+        document.getElementById('menu-camera2').setAttribute('position', {x:0, y:0, z:0});
+        document.getElementById('menu-camera1').setAttribute('rotation', {x:0, y:-6, z:0});
+        document.getElementById('menu-camera2').setAttribute('rotation', {x:0, y:0, z:0});
+      });
+    }
+  });
+
+  AFRAME.registerComponent('pmd-scootor', {
+    init: function () {
+      console.log("scooteron");
+      this.el.addEventListener('click', function (evt) {
+
+        var pmd = document.createElement("a-box"); 
+        pmd.setAttribute("id","vehicle1");
+        pmd.setAttribute("gltf-model","#scooter");
+        pmd.setAttribute("scale","0.1 0.1 0.1");
+        pmd.setAttribute("position","-0.013 -2.419 -0.685");
+        pmd.setAttribute("rotation","0 180 0");
+        pmd.setAttribute("aabb-collider","objects:a-box");
+        document.getElementById('menu-camera2').appendChild(pmd);
+        console.log("test bicycle");
+        document.getElementById('menu-camera1').setAttribute('position', {x:-19, y:1.9, z:-23});
+        document.getElementById('menu-camera2').setAttribute('position', {x:0, y:0, z:0});
+        document.getElementById('menu-camera1').setAttribute('rotation', {x:0, y:-50, z:0});
+        document.getElementById('menu-camera2').setAttribute('rotation', {x:0, y:0, z:0});
+      });
+    }
+  });
+  
+  AFRAME.registerComponent('main-menu', {
+    init: function () {
+      this.el.addEventListener('click', function (evt) {
+        document.getElementById('menu-camera1').setAttribute('position', {x:-19, y:1.9, z:-38});
+        document.getElementById('menu-camera2').setAttribute('position', {x:0, y:0, z:0});
+        document.getElementById('menu-camera1').setAttribute('rotation', {x:0, y:0, z:0});
+        document.getElementById('menu-camera2').setAttribute('rotation', {x:0, y:0, z:0});
+      });
+    }
+  });
+  
+  AFRAME.registerComponent('highscore', {
+    init: function () {
+      this.el.addEventListener('click', function (evt) {
+        document.getElementById('menu-camera1').setAttribute('position', {x:-11, y:1.9, z:-31.9});
+        document.getElementById('menu-camera2').setAttribute('position', {x:0, y:0, z:0});
+        document.getElementById('menu-camera1').setAttribute('rotation', {x:0, y:122, z:0});
+        document.getElementById('menu-camera2').setAttribute('rotation', {x:0, y:0, z:0});
+      });
+    }
+  });
+  
+  AFRAME.registerComponent('game-start', {
+    init: function () {
+      this.el.addEventListener('click', function (evt) {
+        document.getElementById('menu-camera1').setAttribute('position', {x:44, y:1.9, z:-35.7});
+        document.getElementById('menu-camera2').setAttribute('position', {x:0, y:0, z:0});
+        document.getElementById('menu-camera1').setAttribute('rotation', {x:0, y:60, z:0});
+        document.getElementById('menu-camera2').setAttribute('rotation', {x:0, y:0, z:0});
+      });
+    }
+  });
+  
+  
+  AFRAME.registerComponent('game-end', {
+    init: function () {
+      this.el.addEventListener('click', function (evt) {
+        document.getElementById('menu-camera1').setAttribute('position', {x:-13.5, y:1.9, z:-2});
+        document.getElementById('menu-camera2').setAttribute('position', {x:0, y:0, z:0});
+        document.getElementById('menu-camera1').setAttribute('rotation', {x:0, y:60, z:0});
+        document.getElementById('menu-camera2').setAttribute('rotation', {x:0, y:0, z:0});
+      });
+    }
+  });
+  
+  
+  
+  AFRAME.registerComponent('bound-collider', {
+    init: function () {
+      this.el.addEventListener('hitstart', e => {
+        console.log("Item collided");
+        if(document.getElementById('speed') != null){
+           var test1 = document.getElementById('speed');
+        test1.parentNode.removeChild(test1);
+        }
+
+        document.getElementById('menu-camera1').setAttribute('position', {x:-13.5, y:1.9, z:-2});
+        document.getElementById('menu-camera2').setAttribute('position', {x:0, y:0, z:0});
+        document.getElementById('end').setAttribute('value', "Score: "+scorepoint);
+        var test1 = document.getElementById('score');
+        test1.parentNode.removeChild(test1);
+
+        var test2 = document.getElementById('vehicle1');
+        test2.parentNode.removeChild(test2);
+
+        document.getElementById('menu-camera1').setAttribute("movement-controls","speed:0.3");
+        document.getElementById('menu-camera1').setAttribute("movement-controls","enabled:false");
+
       });
 
-  </body>
+    }
+  });
+  
+  
+  AFRAME.registerComponent('bound-collider2', {
+    init: function () {
+      console.log("Hit Start");
+      this.el.addEventListener('hitstart', e => {
+
+
+        console.log("hit and runn asdasdasd");
+        scorepoint = scorepoint - 10;
+        var test1 = document.getElementById('score');
+        test1.parentNode.removeChild(test1);
+
+        var pmd = document.createElement("a-text"); 
+        pmd.setAttribute("id","score");
+        pmd.setAttribute("value","score: "+scorepoint);
+        pmd.setAttribute("color","red");
+        pmd.setAttribute("width","4");
+        pmd.setAttribute("height","4");
+        pmd.setAttribute("position","1.2 1.1 -1.5");
+        console.log('Player hit something!');
+        document.getElementById('menu-camera2').appendChild(pmd);
+
+        var pmd2 = document.createElement("a-text"); 
+          pmd2.setAttribute("id","warning");
+          pmd2.setAttribute("value","Look out for pedestrain cycle on the bicycle road");
+          pmd2.setAttribute("color","red");
+          pmd2.setAttribute("width","4");
+          pmd2.setAttribute("height","4");
+          pmd2.setAttribute("position","-2 1 -4");
+          console.log('Player hit something!');
+          document.getElementById('menu-camera2').appendChild(pmd2);
+
+          setTimeout(function(){
+          var test = document.getElementById('warning');
+          test.parentNode.removeChild(test);
+          },3500);
+
+        document.getElementById('menu-camera1').object3D.position.x -= 1;
+      });
+
+
+    }
+  });
+
+  AFRAME.registerComponent('bound-collider5', {
+    init: function () {
+      console.log("Hit Start");
+      this.el.addEventListener('hitstart', e => {
+
+
+        console.log("hit and runn asdasdasd");
+        scorepoint = scorepoint - 10;
+        var test1 = document.getElementById('score');
+        test1.parentNode.removeChild(test1);
+
+        var pmd = document.createElement("a-text"); 
+        pmd.setAttribute("id","score");
+        pmd.setAttribute("value","score: "+scorepoint);
+        pmd.setAttribute("color","red");
+        pmd.setAttribute("width","4");
+        pmd.setAttribute("height","4");
+        pmd.setAttribute("position","1.2 1.1 -1.5");
+        console.log('Player hit something!');
+        document.getElementById('menu-camera2').appendChild(pmd);
+
+        var pmd2 = document.createElement("a-text"); 
+          pmd2.setAttribute("id","warning");
+          pmd2.setAttribute("value","Look out for vehicle while crossing the road");
+          pmd2.setAttribute("color","red");
+          pmd2.setAttribute("width","4");
+          pmd2.setAttribute("height","4");
+          pmd2.setAttribute("position","-2 1 -4");
+          console.log('Player hit something!');
+          document.getElementById('menu-camera2').appendChild(pmd2);
+
+          setTimeout(function(){
+          var test = document.getElementById('warning');
+          test.parentNode.removeChild(test);
+          },3500);
+
+        document.getElementById('menu-camera1').object3D.position.x -= 1;
+      });
+
+
+    }
+  });
+
+
+  AFRAME.registerComponent('bound-collider3', {
+      init: function () {
+        this.el.addEventListener('hitstart', e => {
+          
+          if(document.getElementById('speed') != null){
+           var test1 = document.getElementById('speed');
+          test1.parentNode.removeChild(test1);
+          }
+
+          var pmd = document.createElement("a-text"); 
+          pmd.setAttribute("id","speed");
+          pmd.setAttribute("value","Speed limit for\n shared path 15km/h");
+          pmd.setAttribute("color","red");
+          pmd.setAttribute("width","4");
+          pmd.setAttribute("height","4");
+          pmd.setAttribute("position","0.9 1 -1.8");
+          console.log('Player hit something!');
+          document.getElementById('menu-camera2').appendChild(pmd);
+
+          document.getElementById('menu-camera1').setAttribute("movement-controls","speed:0.3");
+
+        });
+
+      }
+    });
+
+
+  AFRAME.registerComponent('bound-collider4', {
+    init: function () {
+      this.el.addEventListener('hitstart', e => {
+        
+        if(document.getElementById('speed') != null){
+           var test1 = document.getElementById('speed');
+        test1.parentNode.removeChild(test1);
+        }
+
+        var pmd = document.createElement("a-text"); 
+          pmd.setAttribute("id","speed");
+          pmd.setAttribute("value","Speed limit for\n cycle path 25km/h");
+          pmd.setAttribute("color","red");
+          pmd.setAttribute("width","4");
+          pmd.setAttribute("height","4");
+          pmd.setAttribute("position","0.9 1 -1.8");
+          console.log('Player hit something!');
+          document.getElementById('menu-camera2').appendChild(pmd);
+
+        document.getElementById('menu-camera1').setAttribute("movement-controls","speed:0.6");
+
+      });
+
+    }
+  });
+
+</script>
+</body>
 </html>
